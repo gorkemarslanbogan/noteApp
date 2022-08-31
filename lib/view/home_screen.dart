@@ -58,8 +58,12 @@ final List<NoteModel> noteModelList;
       final data = noteModelList;
       return (index == 4 || index % 2 == 0) ? Padding(
         padding: const EdgeInsets.all(5.0),
-        child: noteViewWidget(noteModel: data[index],),
-      ) : Padding(padding: EdgeInsets.only(top: 35, right: 10,left: 5), child: noteViewWidget(noteModel: data[index],),);
+        child: noteViewWidget(noteModel: data[index],callback: (){
+           context.read<Addnote>().deleteModel(index, data[index], context);
+        },),
+      ) : Padding(padding: EdgeInsets.only(top: 35, right: 10,left: 5), child: noteViewWidget(noteModel: data[index],callback: (){
+         context.read<Addnote>().deleteModel(index, data[index], context);
+      },));
     }));
   }
 }

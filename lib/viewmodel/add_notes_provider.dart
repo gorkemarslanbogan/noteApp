@@ -1,16 +1,13 @@
 
 
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
-import 'package:hive/hive.dart';
 import 'package:noteapp/models/note_model.dart';
 import 'package:noteapp/viewmodel/recently_deleted.dart';
 import 'package:provider/provider.dart';
 
 class Addnote extends ChangeNotifier {
   List<NoteModel> item = [NoteModel("Test", DateTime.now())];
-    Future<bool> addNote(NoteModel model) async {
+    bool addNote(NoteModel model) {
     try {
       item.add(model);
     notifyListeners();
@@ -21,7 +18,6 @@ class Addnote extends ChangeNotifier {
   }
 
  void deleteModel(int index, NoteModel model, BuildContext context) {
-    final indexData = index;
     item.removeAt(index);
     context.read<Recentlydeleted>().item.add(model);
     notifyListeners();

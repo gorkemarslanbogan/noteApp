@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
 import 'package:noteapp/product/Utility/app_utility.dart';
 import 'package:noteapp/product/navigator/navigator.dart';
 import 'package:noteapp/viewmodel/add_notes_provider.dart';
 import 'package:noteapp/viewmodel/recently_deleted.dart';
 import 'package:noteapp/viewmodel/theme_provider.dart';
 import 'package:provider/provider.dart';
-
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   SystemChrome.setPreferredOrientations( 
      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

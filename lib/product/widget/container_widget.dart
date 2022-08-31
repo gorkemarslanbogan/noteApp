@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/models/note_model.dart';
 import 'package:noteapp/product/navigator/navigator.dart';
-
-// this widget only can use gridViewBuilder 
-
+import 'package:noteapp/viewmodel/add_notes_provider.dart';
+import 'package:provider/provider.dart';
 
 class noteViewWidget extends StatelessWidget {
-   noteViewWidget({ Key? key, required this.noteModel }) : super(key: key);
- NoteModel noteModel;
+   noteViewWidget({ Key? key, required this.noteModel, required this.callback }) : super(key: key);
+ final NoteModel noteModel;
+ final VoidCallback callback;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -32,20 +32,68 @@ class noteViewWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Text(noteModel.note ,style: Theme.of(context).textTheme.headline6?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context).primaryColorDark.withOpacity(0.9),
-                ),maxLines: 2, overflow: TextOverflow.ellipsis,)),
+                child: _notTittleText(noteModel: noteModel)),
               Expanded(
                 flex: 7,
-                child: Text(noteModel.note, maxLines: 9, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                  color: Colors.grey.shade800,
-                  fontWeight: FontWeight.w400,
-                ))),
+                child: _noteTextWidget(noteModel: noteModel)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    _removeButton(callback: callback)
+                  ],
+                )
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _removeButton extends StatelessWidget {
+  const _removeButton({
+    Key? key,
+    required this.callback,
+  }) : super(key: key);
+
+  final VoidCallback callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(onPressed: callback, icon: Icon(Icons.delete));
+  }
+}
+
+class _noteTextWidget extends StatelessWidget {
+  const _noteTextWidget({
+    Key? key,
+    required this.noteModel,
+  }) : super(key: key);
+
+  final NoteModel noteModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(noteModel.note, maxLines: 9, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle2?.copyWith(
+      color: Colors.grey.shade800,
+      fontWeight: FontWeight.w400,
+    ));
+  }
+}
+
+class _notTittleText extends StatelessWidget {
+  const _notTittleText({
+    Key? key,
+    required this.noteModel,
+  }) : super(key: key);
+
+  final NoteModel noteModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(noteModel.note ,style: Theme.of(context).textTheme.headline6?.copyWith(
+      fontWeight: FontWeight.w400,
+      color: Theme.of(context).primaryColorDark.withOpacity(0.9),
+    ),maxLines: 2, overflow: TextOverflow.ellipsis,);
   }
 }

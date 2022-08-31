@@ -4,10 +4,9 @@ import 'package:noteapp/product/TexteditingController/controller.dart';
 import 'package:noteapp/product/Utility/app_utility.dart';
 import 'package:noteapp/product/Utility/padding_utility.dart';
 import 'package:noteapp/product/widget/custom_elevationButton.dart';
-import 'package:noteapp/product/widget/sneakBar.dart';
+import 'package:noteapp/product/widget/snackBar.dart';
 import 'package:noteapp/product/widget/text_field.dart';
 import 'package:provider/provider.dart';
-
 import '../viewmodel/add_notes_provider.dart';
 
 

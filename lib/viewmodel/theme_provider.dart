@@ -11,9 +11,9 @@ void changeTheme() {
 }
 
 ThemeData get themeMode => _isLight ? ThemeData.light().copyWith(
-  scaffoldBackgroundColor: Color(0xfff7f8fa),
-  primaryColor: Color(0xfffbfbfb),
-  appBarTheme: AppBarTheme(
+  scaffoldBackgroundColor: const Color(0xfff7f8fa),
+  primaryColor: const Color(0xfffbfbfb),
+  appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
     elevation: 0,
     iconTheme: IconThemeData(
