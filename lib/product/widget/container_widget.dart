@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/models/note_model.dart';
 import 'package:noteapp/product/navigator/navigator.dart';
-import 'package:noteapp/viewmodel/add_notes_provider.dart';
-import 'package:provider/provider.dart';
 
 class noteViewWidget extends StatelessWidget {
-   noteViewWidget({ Key? key, required this.noteModel, required this.callback }) : super(key: key);
+   const noteViewWidget({ Key? key, required this.noteModel, required this.callback }) : super(key: key);
  final NoteModel noteModel;
  final VoidCallback callback;
   @override
@@ -22,7 +20,7 @@ class noteViewWidget extends StatelessWidget {
           color: Colors.black.withOpacity(0.2),
           spreadRadius: 5,
           blurRadius: 10,
-          offset: Offset(3, 3),
+          offset: const Offset(3, 3),
          )]
         ),
         child: Padding(
@@ -39,7 +37,7 @@ class noteViewWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    _removeButton(callback: callback)
+                    _removeButton(callback: callback),
                   ],
                 )
             ],
@@ -60,7 +58,7 @@ class _removeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(onPressed: callback, icon: Icon(Icons.delete));
+    return IconButton(onPressed: callback, icon: const Icon(Icons.delete));
   }
 }
 
@@ -74,7 +72,7 @@ class _noteTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(noteModel.note, maxLines: 9, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle2?.copyWith(
+    return Text(noteModel.note ?? "", maxLines: 9, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.subtitle2?.copyWith(
       color: Colors.grey.shade800,
       fontWeight: FontWeight.w400,
     ));
@@ -91,7 +89,7 @@ class _notTittleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(noteModel.note ,style: Theme.of(context).textTheme.headline6?.copyWith(
+    return Text(noteModel.note ?? "" ,style: Theme.of(context).textTheme.headline6?.copyWith(
       fontWeight: FontWeight.w400,
       color: Theme.of(context).primaryColorDark.withOpacity(0.9),
     ),maxLines: 2, overflow: TextOverflow.ellipsis,);

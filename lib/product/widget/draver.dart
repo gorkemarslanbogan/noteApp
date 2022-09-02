@@ -16,7 +16,7 @@ class customDrawer extends StatefulWidget {
 class _customDrawerState extends State<customDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return const Drawer(
       child: _drawerBody(),
     );
   }
@@ -36,7 +36,7 @@ class _drawerBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        _drawerHeader(),
+        const _drawerHeader(),
         _listtileMenu(title: AppUtility.myNotes, icons: Icons.note_alt_outlined, callback: (){
           Navigator.of(context).pushReplacementNamed(navigatorPagename.Home.withParaf);
         }),
@@ -44,7 +44,7 @@ class _drawerBody extends StatelessWidget {
         Navigator.of(context).pushNamed(navigatorPagename.recentlyDeletedNote.withParaf);
        }),
          _listtileMenu(title: AppUtility.information, icons: Icons.info_sharp,callback: (){
-          showDialog(context: context, builder:  (context) => _alertDialog());
+          showDialog(context: context, builder:  (context) => const _alertDialog());
          }),
 
         

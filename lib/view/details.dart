@@ -12,7 +12,6 @@ import '../viewmodel/add_notes_provider.dart';
 
 class detailsNote extends StatefulWidget {
    const detailsNote({ Key? key,}) : super(key: key);
-
   @override
   State<detailsNote> createState() => _detailsNoteState();
 }
@@ -51,7 +50,7 @@ class _detailsNoteState extends State<detailsNote> {
                 padding: paddingUtilty.symectricPadding,
                 child: scrollTextField(),
               ),
-              customElevationButton(buttonText: AppUtility.change_note, callback: (){
+                  customElevationButton(buttonText: AppUtility.change_note, callback: (){
                   final data =  context.read<Addnote>().changeNote(noteModel!, textController.noteController.text);
                    textController.clearControllerText();
                   (data == true) ? ScaffoldMessenger.of(context).showSnackBar(snackBarWidget.snackBar) : null;

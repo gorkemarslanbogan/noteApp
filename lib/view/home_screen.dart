@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/models/note_model.dart';
 import 'package:noteapp/product/Utility/app_utility.dart';
+import 'package:noteapp/product/Utility/padding_utility.dart';
 import 'package:noteapp/product/navigator/navigator.dart';
+import 'package:noteapp/product/widget/center_circular.dart';
 import 'package:noteapp/product/widget/container_widget.dart';
 import 'package:noteapp/product/widget/draver.dart';
+import 'package:noteapp/product/widget/list_view_not_builder.dart';
+import 'package:noteapp/product/widget/no_note_text.dart';
+import 'package:noteapp/product/widget/note_gridview_builder.dart';
 import 'package:noteapp/viewmodel/add_notes_provider.dart';
+import 'package:noteapp/viewmodel/home_screen_provider.dart';
 import 'package:provider/provider.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({ Key? key }) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -27,17 +30,32 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(AppUtility.AppHomePagetitle),
+        actions: const [_changeView()],
       ),
       body:  Consumer<Addnote>(
       builder: ((context, value, child) {
-      return (value.item.length == kZero) ?  _centerTextWidget() : Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 8.0, left: 8.0),
-        child: _gridViewBuilder(noteModelList: value.item,),
-      );
+      return (value.isLoading) ? const centerCircularproges() : (value.item.length == kZero) ?  centerTextWidget() : Padding(
+        padding: paddingUtilty.gridViewCustomPadding,
+        child: context.watch<homeScreenProvider>().isList ? listViewNot(listModel: value.item,) : note_gridview_builder_home(value: value.item),
+      ); 
     })),
     );
   }
 }
+
+class _changeView extends StatelessWidget {
+  const _changeView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(onPressed: (){
+      context.read<homeScreenProvider>().changeView();
+    }, icon: Icon(context.watch<homeScreenProvider>().isList ? Icons.grid_view : Icons.list));
+  }
+}
+
 
 
 class _gridViewBuilder extends StatelessWidget {
@@ -61,23 +79,12 @@ final List<NoteModel> noteModelList;
         child: noteViewWidget(noteModel: data[index],callback: (){
            context.read<Addnote>().deleteModel(index, data[index], context);
         },),
-      ) : Padding(padding: EdgeInsets.only(top: 35, right: 10,left: 5), child: noteViewWidget(noteModel: data[index],callback: (){
+      ) : Padding(
+         padding: paddingUtilty.gridViewCustomAllPadding, 
+         child: noteViewWidget(noteModel: data[index],callback: (){
          context.read<Addnote>().deleteModel(index, data[index], context);
       },));
     }));
   }
 }
 
-class _centerTextWidget extends StatelessWidget {
-   _centerTextWidget({
-    Key? key,
-  }) : super(key: key);
-final Color _grey800 = Colors.grey.shade800;
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text(AppUtility.you_have_no_not, style: Theme.of(context).textTheme.headline6?.copyWith(
-      fontWeight: FontWeight.w400,
-      color: _grey800
-    ),),);
-  }
-}

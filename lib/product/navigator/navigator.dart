@@ -10,9 +10,9 @@ static const paraf = "/";
   final data = {
         paraf: (context) => const splashScreen(),
         navigatorPagename.Home.withParaf: (context) => const HomeScreen(),
-        navigatorPagename.addNote.withParaf: (context) =>  addNote(),
-        navigatorPagename.recentlyDeletedNote.withParaf: (context) =>  recentlyDeletedNote(),
-        navigatorPagename.detailsNote.withParaf: (context) =>  detailsNote(),
+        navigatorPagename.addNote.withParaf: (context) =>  const addNote(),
+        navigatorPagename.recentlyDeletedNote.withParaf: (context) =>  const recentlyDeletedNote(),
+        navigatorPagename.detailsNote.withParaf: (context) =>  const detailsNote(),
         
       };
 }

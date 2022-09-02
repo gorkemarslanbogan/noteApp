@@ -10,13 +10,8 @@ SharedPreferences? prefs;
 static SharedManager? _instance;
 
   static SharedManager  get instance  {
-    if(_instance == null){
-      _instance = SharedManager._();
-      return _instance!;
-    }
-    else{
-      return _instance!;
-    }
+    _instance ??= SharedManager._();
+    return _instance!;
   }
    Future<SharedPreferences>  instanceShared() async {
    if (prefs == null) {

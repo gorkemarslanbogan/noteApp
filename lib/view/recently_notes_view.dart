@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/product/Utility/app_utility.dart';
 import 'package:noteapp/product/widget/draver.dart';
+import 'package:noteapp/product/widget/list_view_not_builder.dart';
+import 'package:noteapp/product/widget/note_gridview_builder.dart';
+import 'package:noteapp/viewmodel/home_screen_provider.dart';
 import 'package:noteapp/viewmodel/recently_deleted.dart';
 import 'package:provider/provider.dart';
-
-import '../product/widget/container_widget.dart';
-import '../viewmodel/add_notes_provider.dart';
 
 class recentlyDeletedNote extends StatefulWidget {
   const recentlyDeletedNote({ Key? key }) : super(key: key);
@@ -20,6 +20,8 @@ class _recentlyDeletedNoteState extends State<recentlyDeletedNote> {
     return Scaffold(
       drawer: const customDrawer(),
       appBar: AppBar(
+        centerTitle: true,
+        title: Text("Trash"),
       actions: [
         const Center(child: Text(AppUtility.delete_all_note)),
         IconButton(onPressed: (){
@@ -29,25 +31,10 @@ class _recentlyDeletedNoteState extends State<recentlyDeletedNote> {
       ),
       body: Consumer<Recentlydeleted>(
       builder: ((context, value, child) {
-      return  GridView.builder(
-      padding: EdgeInsets.zero,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: MediaQuery.of(context).size.width / ((MediaQuery.of(context).size.height*0.9))
-        ),
-      itemCount: value.item.length,
-      itemBuilder: ((context, index) {
-      final data = value.item;
-      return (index == 4 || index % 2 == 0) ? Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: noteViewWidget(noteModel: data[index],callback: (){
-          context.read<Recentlydeleted>().delete(index);
-        }),
-      ) : Padding(padding: EdgeInsets.only(top: 35, right: 10,left: 5), child: noteViewWidget(noteModel: data[index], callback: (){
-         context.read<Recentlydeleted>().delete(index);
-      },));
-    }));
+      return context.watch<homeScreenProvider>().isList ? listViewNot(listModel: value.item,) : note_gridview_builder_trash();
     }))
     );
   }
 }
+
+

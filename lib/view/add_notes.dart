@@ -21,9 +21,9 @@ class addNote extends StatelessWidget {
             child: scrollTextField(),
           ),
            customElevationButton(
-                callback: (){
-               _model = NoteModel(textController.noteController.text, DateTime.now());
-               final data =  context.read<Addnote>().addNote(_model);
+                callback: () async {
+               _model = NoteModel(textController.noteController.text, DateTime.now().toString(),null);
+               final data = await  context.read<Addnote>().addNote(_model);
                textController.clearControllerText();
               (data == true) ? ScaffoldMessenger.of(context).showSnackBar(snackBarWidget.snackBar) : null;},
                buttonText: AppUtility.add_note),

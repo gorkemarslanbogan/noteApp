@@ -1,13 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:noteapp/product/TexteditingController/controller.dart';
-import 'package:noteapp/product/Utility/app_utility.dart';
 import 'package:noteapp/product/Utility/padding_utility.dart';
-import 'package:provider/provider.dart';
 
-import '../../viewmodel/add_notes_provider.dart';
 class customElevationButton extends StatelessWidget {
-   customElevationButton({ Key? key, required this.buttonText, required this.callback }) : super(key: key);
+   const customElevationButton({ Key? key, required this.buttonText, required this.callback }) : super(key: key);
    final String buttonText;
    final VoidCallback callback;
   @override
