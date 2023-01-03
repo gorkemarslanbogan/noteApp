@@ -1,4 +1,5 @@
-class NoteModel {
+
+class NoteModel{
      int? _id;
      String? _note;
      String? _time;
@@ -23,5 +24,8 @@ String? get note => _note;
 int? get id => _id;
 set setNote(String note) => _note = note;
 String? get time => _time;
+
+
+
   
 }
