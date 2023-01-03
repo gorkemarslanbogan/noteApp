@@ -1,4 +1,4 @@
-# NoteApp
+# NoteApp is Flutter Project
 
 I used SQFLite, Mvvm, Clean Code, Atomic Widget, SharedPreferences(Cache) ,State Managment (Provider) this project.
 
