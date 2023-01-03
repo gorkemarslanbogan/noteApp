@@ -1,6 +1,6 @@
 # NoteApp
 
-I used SQFLite, Mvvm, Clean Code, Atomic Widget, State Managment (Provider) this project.
+I used SQFLite, Mvvm, Clean Code, Atomic Widget, SharedPreferences(Cache) ,State Managment (Provider) this project.
 
 |Page| Details Page|
 |-------------|-------------|
